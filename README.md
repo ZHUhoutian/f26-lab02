@@ -34,4 +34,19 @@ green once you fix it.
 - Property-based tests: `src/test/java/edu/cmu/cs214/availability/AvailabilityProperties.java`
 - Setup: `SETUP.md`
 
+
+
 See the Lab 2 handout on the course page for the three milestones you show a TA.
+
+# milestone 3
+## Controllability gap
+- no booking set ever leaves a gap before dayEnd. None of ``bookingUntilEndOfDayLeavesTheMorningFree``,``gapsBetweenBookingsAreReturned``,``unsortedBookingsAreHandled`ever drives an input where the last booking ends before the close of the business day, so the code path that's actually buggy is never reached in the first place.
+
+- the "empty bookings" / fully-free day is never tried. No test ever calls free(List.of()).
+
+## Observability gap
+- ``returnedSlotsNeverOverlapABooking`` uns the buggy path but can't see the wrong result. A truncated result still passes that check trivially, so the assertion is structurally blind to missing free time. 
+
+
+# AI TOOLS
+- Claude Code - sonnet 5
